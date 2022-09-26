@@ -1,2 +1,2 @@
 # projects
-Hi! Here's where I store my personal projects.
+Brick breaker game to refresh Java skills and learn about Java Swing package.

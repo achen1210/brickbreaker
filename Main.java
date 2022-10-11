@@ -1,3 +1,8 @@
+//Andrew Chen
+//Main.java
+//Main method for Brick Breaker Game
+//October 2022
+
 package brickbreaker;
 
 import javax.swing.*;

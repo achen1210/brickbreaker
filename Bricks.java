@@ -1,3 +1,8 @@
+//Andrew Chen
+//Bricks.java
+//Creates bricks for Brick Breaker game
+//October 2022
+
 package brickbreaker;
 
 import java.awt.*;

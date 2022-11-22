@@ -1,29 +1,37 @@
 package brickbreaker;
 
-import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
+
+
 
 /**
  * Class Main is the main client program for brick breaker game management.
  * It creates the JFrame canvas and places the Gameplay class's elements onto it.
  */
 public class Main {
+    /**
+     * Width and height of game.
+     */
+    public static int width;
+    public static int height;
+
+    /**
+     * Max score of current session.
+     */
+    public static int maxScore = 0;
 
     /**
      * Main method; creates JFrame and initializes Gameplay object.
      * @param args A user input option.
      */
     public static void main(String[] args) {
-        JFrame frame = new JFrame();
-        frame.setLayout(new BorderLayout());
-        Gameplay game = new Gameplay(new BorderLayout());
-        frame.add(game, BorderLayout.CENTER);
-        game.setPreferredSize(new Dimension(1003, 503));
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setTitle("Andrew's Brick Breaker Game");
-        frame.pack();
-        frame.setVisible(true);
-        game.requestFocusInWindow();
+        Dimension size
+                = Toolkit.getDefaultToolkit().getScreenSize();
+
+        width = (int)size.getWidth()/2;
+        height = (int)size.getHeight()/2;
+
+        Menu m = new Menu(width/2, height/2);
+
     }
 }

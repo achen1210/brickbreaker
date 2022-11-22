@@ -21,12 +21,21 @@ public class Bricks {
     public int brickWidth;
     public int brickHeight;
 
+    /**
+     * Number determining how tall to make each brick.
+     */
+    private int heightFactor = 3;
+
+    /**
+     * Sets how often to increment brick's durability, e.g. 2 -> brick's hitpoint(s) increases by 1 every 2 rows.
+     */
+    private int incrementRange = 2;
 
     /**
      * Width and height of the graphics context, to help calculate desired brick width and brick height.
      */
-    private int width = 1000;
-    private int height = 500;
+    private int width;
+    private int height;
 
     /**
      * Creates a new instance of Bricks with the given number of rows and columns.
@@ -34,21 +43,24 @@ public class Bricks {
      * @param rows The number of rows of bricks.
      * @param columns The number of columns of bricks.
      **/
-    public Bricks(int rows, int columns)
+    public Bricks(int rows, int columns, int w, int h)
     {
         bricks = new int[rows][columns];
+        width = w;
+        height = h;
         for(int i = 0; i < rows; i++)
         {
             for(int j = 0; j < columns; j++)
             {
                 //hitpoints of the brick
                 //set to increment by 1 hitpoint every 2 rows
-                bricks[bricks.length-1-i][j] = (i+2)/2;
+                bricks[bricks.length-1-i][j] = (i+incrementRange)/incrementRange;
             }
         }
 
-        brickWidth = width/columns;
-        brickHeight = height/(4*rows);
+
+        brickWidth = (width-6)/columns;
+        brickHeight = height/(heightFactor*rows);
     }
 
     /**
@@ -60,46 +72,46 @@ public class Bricks {
      **/
     public void draw(Graphics2D g)
     {
-        Color darkRed = new Color(204,0,0);
-        Color veryDarkRed = new Color(153,0,0);
         for(int i = 0; i < bricks.length; i++)
         {
             for(int j = 0; j < bricks[0].length; j++)
             {
+                //draws outlines between bricks
+                g.setStroke(new BasicStroke(3));
+                g.setColor(Menu.backgroundColor);
+                g.drawRect(3 + j * brickWidth, (bricks.length - 1 - i) * brickHeight,
+                        brickWidth, brickHeight);
 
                 //sets color of brick based on remaining hitpoints
                 switch(bricks[bricks.length - 1 - i][j])
                 {
                     case 0:
-                        g.setColor(Color.darkGray);
+                        g.setColor(Menu.backgroundColor);
                         break;
                     case 1:
-                        g.setColor(Color.green);
+                        g.setColor(Menu.color1);
                         break;
                     case 2:
-                        g.setColor(Color.orange);
+                        g.setColor(Menu.color2);
                         break;
                     case 3:
-                        g.setColor(Color.red);
+                        g.setColor(Menu.color3);
                         break;
                     case 4:
-                        g.setColor(darkRed);
+                        g.setColor(Menu.color4);
                         break;
                     default:
-                        g.setColor(veryDarkRed);
+                        g.setColor(Menu.color5);
                         break;
                 }
 
-                //draws bricks
-                g.fillRect(j * brickWidth, (bricks.length - 1 - i) * brickHeight,
+                //draws bricks; j and i are swapped, because j is associated with columns, which is x position,
+                // and i is associated with rows, which is y position
+                g.fillRect(3 + j * brickWidth, (bricks.length - 1 - i) * brickHeight,
                         brickWidth, brickHeight);
 
-                //draws outlines between bricks
-                g.setStroke(new BasicStroke(3));
-                g.setColor(Color.darkGray);
-                g.drawRect(j * brickWidth, (bricks.length - 1 - i) * brickHeight,
-                        brickWidth, brickHeight);
-
+                if(j == bricks[0].length - 1)
+                    g.fillRect(width - 6, (bricks.length - 1 - i) * brickHeight, 3, brickHeight);
             }
         }
     }

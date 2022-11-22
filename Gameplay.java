@@ -1,8 +1,3 @@
-//Andrew Chen
-//Gameplay.java
-//Code for Brick Breaker gameplay
-//October 2022
-
 package brickbreaker;
 
 import javax.swing.*;

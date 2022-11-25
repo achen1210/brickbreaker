@@ -7,4 +7,6 @@ To play, simply download the .jar file and run it (Should work with JRE 7+, but 
 
 Current next steps:
 *Add user input feature to control ball speed, number of bricks, etc.
-*Add additional features like multiple balls, special bricks, etc.
+*Add additional features like multiple balls, special bricks, multiple paddles, etc.
+*Fill out options panel
+*Add pre-built levels or auto-generated levels and difficulties for the user to play
